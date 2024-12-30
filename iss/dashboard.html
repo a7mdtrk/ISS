@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .container {
+            width: 100%;
+            max-width: 700px;
+            margin: 50px auto;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            background-color: #e9ecef;
+            padding: 10px;
+            margin: 0 0 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        #chat {
+            height: 300px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            overflow-y: scroll;
+            background-color: #f8f9fa;
+            margin-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        button {
+            background-color: #6c757d;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #5a6268;
+        }
+        .message {
+            background: #f1f1f1;
+            border: 1px solid #ddd;
+            padding: 5px 10px;
+            margin: 5px 0;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Chat Room</h2>
+
+        <!-- Room Input -->
+        <div class="form-group">
+            <input type="text" id="room_id" placeholder="Enter Room ID">
+            <button onclick="joinRoom()">Join Room</button>
+        </div>
+
+        <!-- Encryption Selection -->
+        <div class="form-group">
+            <select id="encryption">
+                <option value="none">None</option>
+                <option value="aes">AES</option>
+                <option value="des">DES</option>
+            </select>
+        </div>
+
+        <!-- Chat Window -->
+        <div id="chat"></div>
+
+        <!-- Message Input -->
+        <div class="form-group">
+            <input type="text" id="message" placeholder="Type your message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.js"></script>
+    <script>
+        const socket = io('http://localhost:3000');
+        const SECRET_KEY = "omar"; // Static encryption key
+        let currentRoom = '';
+
+        // Join a room
+        function joinRoom() {
+            const roomId = document.getElementById('room_id').value.trim();
+            if (!roomId) {
+                alert("Please enter a valid Room ID.");
+                return;
+            }
+            currentRoom = roomId;
+            socket.emit('joinRoom', roomId);
+            document.getElementById('chat').innerHTML = `<p>Joined Room: <strong>${roomId}</strong></p>`;
+        }
+
+        // Send a message
+        function sendMessage() {
+            const messageText = document.getElementById('message').value.trim();
+            const encryptionType = document.getElementById('encryption').value;
+
+            if (!messageText || !currentRoom) {
+                alert("Enter a message and join a room first!");
+                return;
+            }
+
+            let encryptedMessage = messageText;
+
+            // Apply encryption
+            if (encryptionType === 'aes') {
+                encryptedMessage = CryptoJS.AES.encrypt(messageText, SECRET_KEY).toString();
+            } else if (encryptionType === 'des') {
+                encryptedMessage = CryptoJS.DES.encrypt(messageText, SECRET_KEY).toString();
+            }
+
+            // Send the message to the server
+            socket.emit('message', {
+                sender_id: 1,
+                receiver_id: 2,
+                room_id: currentRoom,
+                message_text: messageText,
+                encryption_type: encryptionType,
+                encrypted_message: encryptedMessage
+            });
+
+            document.getElementById('message').value = '';
+        }
+
+        // Receive and display messages
+        socket.on('message', (msg) => {
+            const chatBox = document.getElementById('chat');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message';
+
+            let decryptedMessage = msg.encrypted_message;
+            if (msg.encryption_type === 'aes' && msg.encrypted_message) {
+                decryptedMessage = CryptoJS.AES.decrypt(msg.encrypted_message, SECRET_KEY).toString(CryptoJS.enc.Utf8);
+            } else if (msg.encryption_type === 'des' && msg.encrypted_message) {
+                decryptedMessage = CryptoJS.DES.decrypt(msg.encrypted_message, SECRET_KEY).toString(CryptoJS.enc.Utf8);
+            }
+
+            messageDiv.innerHTML = `
+                <strong>Room ${msg.room_id}:</strong><br>
+                Plain: ${msg.plaintext_message}<br>
+                Encrypted (${msg.encryption_type.toUpperCase()}): ${msg.encrypted_message || 'N/A'}<br>
+                Decrypted: ${decryptedMessage || 'N/A'}
+            `;
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+[05-Dec-2024 19:23:26 Europe/Berlin] PHP Warning:  Undefined array key "email_username" in C:\xampp\htdocs\iss\api\login.php on line 25
+[05-Dec-2024 19:23:26 Europe/Berlin] PHP Warning:  Undefined array key "email_password" in C:\xampp\htdocs\iss\api\login.php on line 26
+[05-Dec-2024 19:23:26 Europe/Berlin] PHP Warning:  Undefined array key "email_username" in C:\xampp\htdocs\iss\api\login.php on line 30
+[05-Dec-2024 19:23:26 Europe/Berlin] PHP Warning:  Undefined array key "company_name" in C:\xampp\htdocs\iss\api\login.php on line 30
+[05-Dec-2024 19:23:26 Europe/Berlin] Mailer Error: Invalid address:  (From): 
+[05-Dec-2024 19:26:02 Europe/Berlin] PHP Warning:  Undefined array key "email_username" in C:\xampp\htdocs\iss\api\login.php on line 25
+[05-Dec-2024 19:26:02 Europe/Berlin] PHP Warning:  Undefined array key "email_password" in C:\xampp\htdocs\iss\api\login.php on line 26
+[05-Dec-2024 19:26:02 Europe/Berlin] PHP Warning:  Undefined array key "email_username" in C:\xampp\htdocs\iss\api\login.php on line 30
+[05-Dec-2024 19:26:02 Europe/Berlin] PHP Warning:  Undefined array key "company_name" in C:\xampp\htdocs\iss\api\login.php on line 30
+[05-Dec-2024 19:26:02 Europe/Berlin] Mailer Error: Invalid address:  (From): 
+[05-Dec-2024 19:27:56 Europe/Berlin] PHP Warning:  Undefined array key "email_username" in C:\xampp\htdocs\iss\api\login.php on line 25
+[05-Dec-2024 19:27:56 Europe/Berlin] PHP Warning:  Undefined array key "email_password" in C:\xampp\htdocs\iss\api\login.php on line 26
+[05-Dec-2024 19:27:56 Europe/Berlin] PHP Warning:  Undefined array key "email_username" in C:\xampp\htdocs\iss\api\login.php on line 30
+[05-Dec-2024 19:27:56 Europe/Berlin] PHP Warning:  Undefined array key "company_name" in C:\xampp\htdocs\iss\api\login.php on line 30
+[05-Dec-2024 19:27:56 Europe/Berlin] Mailer Error: Invalid address:  (From): 
+[05-Dec-2024 19:30:23 Europe/Berlin] PHP Warning:  Undefined array key "email_username" in C:\xampp\htdocs\iss\api\login.php on line 25
+[05-Dec-2024 19:30:23 Europe/Berlin] PHP Warning:  Undefined array key "email_password" in C:\xampp\htdocs\iss\api\login.php on line 26
+[05-Dec-2024 19:30:23 Europe/Berlin] PHP Warning:  Undefined array key "email_username" in C:\xampp\htdocs\iss\api\login.php on line 30
+[05-Dec-2024 19:30:23 Europe/Berlin] PHP Warning:  Undefined array key "company_name" in C:\xampp\htdocs\iss\api\login.php on line 30
+[05-Dec-2024 19:30:23 Europe/Berlin] Mailer Error: Invalid address:  (From): 
+[05-Dec-2024 19:30:28 Europe/Berlin] PHP Warning:  Undefined array key "email_username" in C:\xampp\htdocs\iss\api\login.php on line 25
+[05-Dec-2024 19:30:28 Europe/Berlin] PHP Warning:  Undefined array key "email_password" in C:\xampp\htdocs\iss\api\login.php on line 26
+[05-Dec-2024 19:30:28 Europe/Berlin] PHP Warning:  Undefined array key "email_username" in C:\xampp\htdocs\iss\api\login.php on line 30
+[05-Dec-2024 19:30:28 Europe/Berlin] PHP Warning:  Undefined array key "company_name" in C:\xampp\htdocs\iss\api\login.php on line 30
+[05-Dec-2024 19:30:28 Europe/Berlin] Mailer Error: Invalid address:  (From): 
+[05-Dec-2024 19:30:28 Europe/Berlin] PHP Warning:  Undefined array key "email_username" in C:\xampp\htdocs\iss\api\login.php on line 25
+[05-Dec-2024 19:30:28 Europe/Berlin] PHP Warning:  Undefined array key "email_password" in C:\xampp\htdocs\iss\api\login.php on line 26
+[05-Dec-2024 19:30:28 Europe/Berlin] PHP Warning:  Undefined array key "email_username" in C:\xampp\htdocs\iss\api\login.php on line 30
+[05-Dec-2024 19:30:28 Europe/Berlin] PHP Warning:  Undefined array key "company_name" in C:\xampp\htdocs\iss\api\login.php on line 30
+[05-Dec-2024 19:30:28 Europe/Berlin] Mailer Error: Invalid address:  (From): 
+[05-Dec-2024 19:31:15 Europe/Berlin] PHP Warning:  Undefined array key "email_username" in C:\xampp\htdocs\iss\api\send_login.php on line 25
+[05-Dec-2024 19:31:15 Europe/Berlin] PHP Warning:  Undefined array key "email_password" in C:\xampp\htdocs\iss\api\send_login.php on line 26
+[05-Dec-2024 19:31:15 Europe/Berlin] PHP Warning:  Undefined array key "email_username" in C:\xampp\htdocs\iss\api\send_login.php on line 30
+[05-Dec-2024 19:31:15 Europe/Berlin] PHP Warning:  Undefined array key "company_name" in C:\xampp\htdocs\iss\api\send_login.php on line 30
+[05-Dec-2024 19:31:15 Europe/Berlin] Mailer Error: Invalid address:  (From): 
+[05-Dec-2024 19:34:39 Europe/Berlin] Mailer Error: SMTP Error: Could not authenticate.
+[05-Dec-2024 19:38:17 Europe/Berlin] Mailer Error: SMTP Error: Could not authenticate.
+[05-Dec-2024 19:38:53 Europe/Berlin] Mailer Error: SMTP Error: Could not authenticate.
+[05-Dec-2024 19:39:17 Europe/Berlin] Mailer Error: SMTP Error: Could not authenticate.
+[05-Dec-2024 19:40:15 Europe/Berlin] Mailer Error: SMTP Error: Could not authenticate.
+// Enable error logging for debugging
+ini_set('log_errors', 'On');
+ini_set('error_log', __DIR__ . '/error_log.txt');
+error_reporting(E_ALL);
+
+header("Content-Type: application/json");
+
+// Include PHPMailer and credentials
+require 'PHPMailer/PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/PHPMailer/src/SMTP.php';
+require 'PHPMailer/PHPMailer/src/Exception.php';
+include '../controls/credentials.php'; // Contains email credentials
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;[05-Dec-2024 20:01:59 Europe/Berlin] PHP Warning:  Undefined array key "company_name" in C:\xampp\htdocs\iss\api\send_login.php on line 28
+[05-Dec-2024 20:02:00 Europe/Berlin] Mailer Error: SMTP Error: Could not authenticate.
+[05-Dec-2024 20:04:45 Europe/Berlin] PHP Warning:  Undefined array key "company_name" in C:\xampp\htdocs\iss\api\send_login.php on line 28
+[05-Dec-2024 20:04:46 Europe/Berlin] Mailer Error: SMTP Error: Could not authenticate.
+[05-Dec-2024 20:06:06 Europe/Berlin] PHP Warning:  Undefined array key "company_name" in C:\xampp\htdocs\iss\api\send_login.php on line 28
+[05-Dec-2024 20:06:08 Europe/Berlin] Mailer Error: SMTP Error: Could not authenticate.
+[05-Dec-2024 20:06:53 Europe/Berlin] PHP Warning:  Undefined array key "company_name" in C:\xampp\htdocs\iss\api\send_login.php on line 28
+[05-Dec-2024 20:06:55 Europe/Berlin] Mailer Error: SMTP Error: Could not authenticate.
+[05-Dec-2024 20:07:15 Europe/Berlin] Mailer Error: SMTP Error: Could not authenticate.
